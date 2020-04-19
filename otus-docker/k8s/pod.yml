@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: otus-lesson
+  labels:
+    app: otus-lesson
+spec:
+  containers:
+    - name: otus-docker-lesson
+      image: shkodinda/otus-docker-lesson:latest
+      ports:
+        - containerPort: 80
