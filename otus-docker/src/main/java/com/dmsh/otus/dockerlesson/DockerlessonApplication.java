@@ -15,19 +15,4 @@ public class DockerlessonApplication {
         SpringApplication.run(DockerlessonApplication.class, args);
     }
 
-    @RestController
-    class HealthCheck {
-
-        @GetMapping(value = "/health", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-        public ResponseEntity health() {
-            return ResponseEntity.ok().body("{\"Status\": \"OK\"}");
-        }
-
-        @GetMapping(value = "/", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-        public ResponseEntity hellootus() {
-            String hostName = System.getenv("HOSTNAME");
-            return ResponseEntity.ok().body("{\"Message\": \""+hostName+"\"}");
-        }
-    }
-
 }

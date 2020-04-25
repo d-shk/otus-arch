@@ -1,0 +1,1 @@
+insert into authors (name, surname) values ('John', 'Johnson');
