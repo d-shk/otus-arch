@@ -203,9 +203,9 @@
 	],
 	"variable": [
 		{
-			"id": "89fb088c-5674-4b52-8e94-1fced754b7ca",
+			"id": "665dc6a5-bee9-46db-b36b-9c2a0edb5492",
 			"key": "host",
-			"value": "localhost:8000",
+			"value": "arch.homework/otusapp",
 			"type": "string"
 		}
 	],
