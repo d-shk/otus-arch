@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "otus-java-app-chart.fullname" . }}
+  labels:
+    {{- include "otus-java-app-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "otus-java-app-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "otus-java-app-chart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: java-app-config
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: java-app-config
+                  key: DB_PORT
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: java-app-secret
+                  key: DB_PASSWORD
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: java-app-secret
+                  key: DB_NAME
+          livenessProbe:
+            httpGet:
+              port: 8000
+              path: /api/v1/
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+              httpGet:
+                port: 8000
+                path: /api/v1/health
+              initialDelaySeconds: 15
+              periodSeconds: 5

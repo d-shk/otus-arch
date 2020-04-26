@@ -11,7 +11,7 @@ spring:
     password: ${DB_PASSWORD:1}
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: ${DB_RECREATE:create}
 
     database-platform: org.hibernate.dialect.PostgreSQL95Dialect
     generate-ddl: ${GENERATE_DDL:true}
