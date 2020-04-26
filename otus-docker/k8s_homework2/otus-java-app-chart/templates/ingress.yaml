@@ -1,12 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: java-app-ingress
+  name: {{ include "otus-java-app-chart.fullname" . }}
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-    - host: arch.homework
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
           - path: /otusapp($|/)(.*)

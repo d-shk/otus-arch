@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: java-app-config
+  name: {{ include "otus-java-app-chart.fullname" . }}
 data:
-  DB_HOST: {{ printf "%s" (include "postgresql.fullname" .)}}
-  DB_PORT: {{ printf "%s" .Values.postgresql.service.port}}
+  DB_HOST: "{{ (include "postgresql.fullname" .) }}"
+  DB_PORT: "{{ .Values.postgresql.service.port }}"
 
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: java-app-secret
+  name: {{ include "otus-java-app-chart.fullname" . }}
 data:
   DB_PASSWORD: {{ printf "%s" .Values.postgresql.postgresqlPassword | b64enc | quote }}
   DB_NAME: {{ printf "%s" .Values.postgresql.postgresqlDatabase | b64enc | quote }}

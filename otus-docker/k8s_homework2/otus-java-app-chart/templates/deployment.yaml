@@ -25,22 +25,22 @@ spec:
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: java-app-config
+                  name: {{ include "otus-java-app-chart.fullname" . }}
                   key: DB_HOST
             - name: DB_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: java-app-config
+                  name: {{ include "otus-java-app-chart.fullname" . }}
                   key: DB_PORT
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: java-app-secret
+                  name: {{ include "otus-java-app-chart.fullname" . }}
                   key: DB_PASSWORD
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
-                  name: java-app-secret
+                  name: {{ include "otus-java-app-chart.fullname" . }}
                   key: DB_NAME
           livenessProbe:
             httpGet:

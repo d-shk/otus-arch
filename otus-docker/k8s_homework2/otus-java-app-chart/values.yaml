@@ -11,13 +11,16 @@ service:
   type: NodePort
   port: 8000
 
+ingress:
+  host: arch.homework
+
 postgresql:
   enabled: true
   postgresqlUsername: postgres
   postgresqlPassword: "1"
   postgresqlDatabase: users_db
   service:
-    port: "5432"
+    port: 5432
 
 #ingress:
 #  enabled: false

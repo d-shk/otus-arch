@@ -51,13 +51,7 @@ app.kubernetes.io/name: {{ include "otus-java-app-chart.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "otus-java-app-chart.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "otus-java-app-chart.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}
+
+{{- define "postgresql.fullname" -}}
+{{- printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
