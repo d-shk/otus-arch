@@ -18,8 +18,8 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           ports:
-            - name: http
-              containerPort: 80
+            - name: web
+              containerPort: 8000
               protocol: TCP
           env:
             - name: DB_HOST
